@@ -1,6 +1,7 @@
-import { Suspense, useState, useEffect, Component, ReactNode } from 'react';
-import { Canvas } from '@react-three/fiber';
-import AnimeDeveloper from './AnimeDeveloper';
+import { Suspense, useState, useEffect, Component, ReactNode, useRef } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useGLTF, OrbitControls } from '@react-three/drei';
+import * as THREE from 'three';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -9,6 +10,7 @@ interface ErrorBoundaryProps {
 
 interface ErrorBoundaryState {
   hasError: boolean;
+  error?: Error;
 }
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
@@ -17,37 +19,15 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(): ErrorBoundaryState {
-    return { hasError: true };
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { hasError: true, error };
   }
-
-  componentDidCatch() {}
 
   render() {
     if (this.state.hasError) {
       return this.props.fallback;
     }
     return this.props.children;
-  }
-}
-
-function checkWebGLSupport(): boolean {
-  try {
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl2') || 
-               canvas.getContext('webgl') || 
-               canvas.getContext('experimental-webgl');
-    if (!gl) return false;
-    const debugInfo = (gl as WebGLRenderingContext).getExtension('WEBGL_debug_renderer_info');
-    if (debugInfo) {
-      const renderer = (gl as WebGLRenderingContext).getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-      if (renderer && (renderer.includes('SwiftShader') || renderer.includes('llvmpipe'))) {
-        return false;
-      }
-    }
-    return true;
-  } catch {
-    return false;
   }
 }
 
@@ -61,28 +41,8 @@ function useMousePosition() {
       setPosition({ x, y });
     };
 
-    const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        const touch = e.touches[0];
-        const x = (touch.clientX / window.innerWidth) * 2 - 1;
-        const y = -(touch.clientY / window.innerHeight) * 2 + 1;
-        setPosition({ x, y });
-      }
-    };
-
-    const handleTouchEnd = () => {
-      setPosition({ x: 0, y: 0 });
-    };
-
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleTouchMove);
-    window.addEventListener('touchend', handleTouchEnd);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchend', handleTouchEnd);
-    };
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return position;
@@ -94,29 +54,131 @@ function DeveloperSceneFallback() {
       <div className="relative w-48 h-48">
         <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 to-primary/10 animate-pulse" />
         <div className="absolute inset-4 rounded-full bg-gradient-to-br from-primary/20 to-transparent" />
-        <div className="absolute inset-8 rounded-full bg-gradient-to-br from-primary/10 to-transparent animate-spin" style={{ animationDuration: '8s' }} />
       </div>
     </div>
+  );
+}
+
+function CharacterModel({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
+  const groupRef = useRef<THREE.Group>(null);
+  const { scene } = useGLTF('/assets/anime_character.glb');
+  const { invalidate } = useThree();
+  
+  const targetRotation = useRef({ x: 0, y: 0 });
+  const currentRotation = useRef({ x: 0, y: 0 });
+  const velocity = useRef({ x: 0, y: 0 });
+  const breathingPhase = useRef(0);
+  const baseScale = useRef(1);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (scene && groupRef.current && !initialized.current) {
+      scene.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+          if (child.material) {
+            if (Array.isArray(child.material)) {
+              child.material.forEach(mat => mat.needsUpdate = true);
+            } else {
+              child.material.needsUpdate = true;
+            }
+          }
+        }
+      });
+
+      const box = new THREE.Box3().setFromObject(scene);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const scale = 2.5 / maxDim;
+      baseScale.current = scale;
+      
+      groupRef.current.scale.setScalar(scale);
+      groupRef.current.position.set(
+        -center.x * scale, 
+        -center.y * scale - 0.3, 
+        -center.z * scale
+      );
+      initialized.current = true;
+      invalidate();
+    }
+  }, [scene, invalidate]);
+
+  useFrame((_, delta) => {
+    if (!groupRef.current || !initialized.current) return;
+
+    const maxRotationY = 0.4;
+    const maxRotationX = 0.2;
+    
+    const clampedMouseY = THREE.MathUtils.clamp(mouseY, -0.8, 0.8);
+    
+    targetRotation.current.x = THREE.MathUtils.clamp(
+      clampedMouseY * 0.2,
+      -maxRotationX,
+      maxRotationX
+    );
+    targetRotation.current.y = THREE.MathUtils.clamp(
+      mouseX * 0.45,
+      -maxRotationY,
+      maxRotationY
+    );
+
+    const dampingFactor = 0.92;
+    const springForce = 0.06;
+
+    velocity.current.x += (targetRotation.current.x - currentRotation.current.x) * springForce;
+    velocity.current.y += (targetRotation.current.y - currentRotation.current.y) * springForce;
+    
+    velocity.current.x *= dampingFactor;
+    velocity.current.y *= dampingFactor;
+
+    currentRotation.current.x += velocity.current.x;
+    currentRotation.current.y += velocity.current.y;
+
+    breathingPhase.current += delta * 1.2;
+    const breathingScale = baseScale.current * (1 + Math.sin(breathingPhase.current) * 0.003);
+
+    groupRef.current.rotation.x = currentRotation.current.x;
+    groupRef.current.rotation.y = currentRotation.current.y;
+    groupRef.current.scale.setScalar(breathingScale);
+  });
+
+  return (
+    <group ref={groupRef}>
+      <primitive object={scene} />
+    </group>
+  );
+}
+
+function LoadingSpinner() {
+  const meshRef = useRef<THREE.Mesh>(null);
+  
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.y = state.clock.elapsedTime * 2;
+    }
+  });
+  
+  return (
+    <mesh ref={meshRef}>
+      <torusGeometry args={[0.5, 0.1, 16, 32]} />
+      <meshStandardMaterial color="#6366f1" wireframe />
+    </mesh>
   );
 }
 
 function Scene({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 5, 8]} intensity={1.5} color="#ffffff" />
-      <directionalLight position={[-5, 3, 5]} intensity={0.8} color="#a0a0ff" />
-      <pointLight position={[0, 2, 4]} intensity={0.6} color="#6366f1" />
-      <pointLight position={[-3, -2, 3]} intensity={0.3} color="#f472b6" />
-      <spotLight
-        position={[0, 5, 5]}
-        angle={0.5}
-        penumbra={0.5}
-        intensity={0.8}
-        color="#ffffff"
-        castShadow
-      />
-      <AnimeDeveloper mouseX={mouseX} mouseY={mouseY} />
+      <ambientLight intensity={1} />
+      <directionalLight position={[5, 5, 8]} intensity={2} />
+      <directionalLight position={[-5, 3, 5]} intensity={1} />
+      <pointLight position={[0, 2, 4]} intensity={0.8} color="#6366f1" />
+      <Suspense fallback={<LoadingSpinner />}>
+        <CharacterModel mouseX={mouseX} mouseY={mouseY} />
+      </Suspense>
     </>
   );
 }
@@ -126,37 +188,37 @@ function DeveloperScene() {
   const mousePosition = useMousePosition();
 
   useEffect(() => {
-    setIsSupported(checkWebGLSupport());
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+      setIsSupported(!!gl);
+    } catch {
+      setIsSupported(false);
+    }
   }, []);
 
-  if (isSupported === null) {
-    return <DeveloperSceneFallback />;
-  }
-
-  if (!isSupported) {
+  if (isSupported === null || !isSupported) {
     return <DeveloperSceneFallback />;
   }
 
   return (
     <ErrorBoundary fallback={<DeveloperSceneFallback />}>
       <Canvas
-        camera={{ position: [0, 0, 2.8], fov: 45 }}
+        camera={{ position: [0, 0, 4], fov: 45 }}
         gl={{ 
           antialias: true, 
           alpha: true,
-          powerPreference: 'default',
-          failIfMajorPerformanceCaveat: false
+          powerPreference: 'high-performance'
         }}
         style={{ background: 'transparent' }}
         dpr={[1, 2]}
-        onCreated={() => {}}
       >
-        <Suspense fallback={null}>
-          <Scene mouseX={mousePosition.x} mouseY={mousePosition.y} />
-        </Suspense>
+        <Scene mouseX={mousePosition.x} mouseY={mousePosition.y} />
       </Canvas>
     </ErrorBoundary>
   );
 }
+
+useGLTF.preload('/assets/anime_character.glb');
 
 export default DeveloperScene;
