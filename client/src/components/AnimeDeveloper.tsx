@@ -12,8 +12,8 @@ function AnimeDeveloper({ mouseX, mouseY }: AnimeDeveloperProps) {
   const headRef = useRef<THREE.Group>(null);
   const leftEyeRef = useRef<THREE.Group>(null);
   const rightEyeRef = useRef<THREE.Group>(null);
-  const leftPupilRef = useRef<THREE.Mesh>(null);
-  const rightPupilRef = useRef<THREE.Mesh>(null);
+  const leftPupilRef = useRef<THREE.Group>(null);
+  const rightPupilRef = useRef<THREE.Group>(null);
   
   const targetHeadRotation = useRef({ x: 0, y: 0 });
   const currentHeadRotation = useRef({ x: 0, y: 0 });
