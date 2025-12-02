@@ -59,6 +59,9 @@ function DeveloperSceneFallback() {
   );
 }
 
+// NOTE: This component previously rendered the imported GLB character.
+// The user requested to remove the character, so it is no longer used.
+// Keeping it for now in case you want to restore it later.
 function CharacterModel({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
   const groupRef = useRef<THREE.Group>(null);
   const { scene } = useGLTF('/assets/anime_character.glb');
@@ -73,6 +76,7 @@ function CharacterModel({ mouseX, mouseY }: { mouseX: number; mouseY: number }) 
 
   useEffect(() => {
     if (scene && groupRef.current && !initialized.current) {
+      // Enable proper shadows/material updates but keep the original model proportions.
       scene.traverse((child) => {
         if (child instanceof THREE.Mesh) {
           child.castShadow = true;
@@ -87,20 +91,18 @@ function CharacterModel({ mouseX, mouseY }: { mouseX: number; mouseY: number }) 
         }
       });
 
-      const box = new THREE.Box3().setFromObject(scene);
-      const size = box.getSize(new THREE.Vector3());
-      const center = box.getCenter(new THREE.Vector3());
-      
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = 2.5 / maxDim;
+      // Use a fixed, uniform scale and position so the character is not squeezed/distorted
+      // compared to how it looks in the original GLB viewer.
+      const scale = 1.4;
       baseScale.current = scale;
-      
+
       groupRef.current.scale.setScalar(scale);
-      groupRef.current.position.set(
-        -center.x * scale, 
-        -center.y * scale - 0.3, 
-        -center.z * scale
-      );
+      groupRef.current.position.set(0, -0.9, 0);
+
+      // If the character faces the wrong way, you can tweak this rotation.
+      // For now we keep x and z as-is and do a gentle Y rotation.
+      groupRef.current.rotation.set(0, Math.PI, 0);
+
       initialized.current = true;
       invalidate();
     }
@@ -169,15 +171,49 @@ function LoadingSpinner() {
   );
 }
 
+function DeveloperSphere({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
+  const sphereRef = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    const t = state.clock.elapsedTime;
+
+    if (sphereRef.current) {
+      const tiltX = THREE.MathUtils.clamp(mouseY * 0.25, -0.25, 0.25);
+      const tiltY = THREE.MathUtils.clamp(mouseX * 0.35, -0.35, 0.35);
+
+      sphereRef.current.rotation.y = t * 0.2 + tiltY;
+      sphereRef.current.rotation.x = Math.sin(t * 0.3) * 0.1 + tiltX;
+      sphereRef.current.position.y = Math.sin(t * 0.6) * 0.06 - 0.08;
+      sphereRef.current.position.x = THREE.MathUtils.lerp(
+        sphereRef.current.position.x,
+        mouseX * 0.25,
+        0.08
+      );
+    }
+  });
+
+  return (
+    <mesh ref={sphereRef}>
+      <sphereGeometry args={[1, 48, 48]} />
+      <meshStandardMaterial
+        color="#60a5fa"
+        roughness={0.2}
+        metalness={0.4}
+        wireframe
+      />
+    </mesh>
+  );
+}
+
 function Scene({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
   return (
     <>
-      <ambientLight intensity={1} />
-      <directionalLight position={[5, 5, 8]} intensity={2} />
-      <directionalLight position={[-5, 3, 5]} intensity={1} />
-      <pointLight position={[0, 2, 4]} intensity={0.8} color="#6366f1" />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[4, 6, 6]} intensity={1.4} />
+      <directionalLight position={[-3, 4, -2]} intensity={0.6} />
+      <pointLight position={[0, 1.5, 3]} intensity={0.7} color="#60a5fa" distance={10} />
       <Suspense fallback={<LoadingSpinner />}>
-        <CharacterModel mouseX={mouseX} mouseY={mouseY} />
+        <DeveloperSphere mouseX={mouseX} mouseY={mouseY} />
       </Suspense>
     </>
   );
