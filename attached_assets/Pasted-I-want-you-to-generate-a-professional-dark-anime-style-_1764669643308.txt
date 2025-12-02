@@ -1,0 +1,103 @@
+I want you to generate a professional dark-anime style 3D developer character for my Hero section, inspired by the visual style and intensity of characters from Attack on Titan (but NOT an exact copy of Eren Yeager or any copyrighted character).
+
+🎨 Character Requirements
+
+A stylish anime-inspired male character
+
+Sharp eyes, clean jawline, serious expression
+
+Dark messy hair (anime style)
+
+Clothing: simple dark jacket or hoodie
+
+Semi-realistic lighting
+
+Should look cool, mature, and professional, not cartoonish
+
+💻 3D Requirements
+
+Use:
+
+React Three Fiber
+
+@react-three/drei
+
+Three.js
+
+Vite + React
+
+Generate a 3D head model or anime-inspired avatar that:
+
+Can rotate slightly as the user's cursor moves
+
+Has separate eyeball meshes for tracking
+
+Has subtle head movement following cursor (not too much)
+
+Features smooth & natural rotation, no snapping
+
+Uses lerp for easing
+
+Restricts movement so the eyes do not move unnaturally upward
+
+🌟 Cursor Movement Improvements
+
+Fix the “cursor up” movement problem:
+
+Eye rotation must be limited vertically (e.g., -0.12 to 0.12 radians)
+
+When cursor goes very high, cap the rotation to maintain realism
+
+Head tilt should be minimal and smooth
+
+Use damping on movement
+
+Add acceleration + deceleration smoothing
+
+🛠 Generate the following components:
+
+Hero.jsx — layout with text on right side, 3D model on left
+
+AnimeDeveloper.jsx — full 3D character model with:
+
+head mesh
+
+2 eye meshes
+
+eye tracking logic
+
+smoothed head rotation
+
+ThreeScene.jsx (if needed)
+
+Supporting hooks:
+
+useMousePosition()
+
+useSmoothFollow()
+
+⚙️ Behavior Requirements
+
+Map mouse to normalized device coordinates
+
+Convert to small rotation values
+
+Clamp movement (THREE.MathUtils.clamp)
+
+Smooth using THREE.MathUtils.lerp
+
+Make the character feel alive but not exaggerated
+
+Add a subtle breathing animation
+
+📝 Hero Text (right side)
+
+“Hi, I'm Raj Suryavanshi”
+
+“Full Stack Developer”
+
+Short intro paragraph
+
+🔥 Final Output Needed
+
+Generate complete working code with all imports, components, and a fully functional AoT-inspired anime developer head whose eyes & head follow the cursor smoothly and realistically.

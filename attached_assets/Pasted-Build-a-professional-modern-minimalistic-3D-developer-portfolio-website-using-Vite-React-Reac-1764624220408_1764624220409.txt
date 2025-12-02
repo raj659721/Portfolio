@@ -1,0 +1,164 @@
+Build a professional, modern, minimalistic 3D developer portfolio website using:
+
+Vite + React
+
+React Three Fiber (@react-three/fiber)
+
+@react-three/drei
+
+Framer Motion
+
+Tailwind CSS
+
+Supabase (for backend, database & API)
+
+❌ No Express.js, no backend server — only Supabase
+
+🎨 Design Requirements
+
+The UI must be clean, premium, corporate, NOT funky.
+
+Use Black / White / Grey / Navy Blue palette.
+
+Use modern Apple-style design with soft gradients & glassmorphism.
+
+Include professional 3D elements, like:
+
+A rotating sphere
+
+Geometric 3D shape
+
+Particle animation
+
+Soft camera movement
+
+Include smooth animations using Framer Motion.
+
+Must be fully responsive for all devices.
+
+📌 Portfolio Content (Use EXACT details)
+Name:
+
+Raj Suryavanshi
+
+Role:
+
+Full Stack Developer | CSE Student
+
+Summary:
+
+Motivated and detail-oriented Computer Science student with a strong foundation in web development, problem solving, and software engineering principles. Skilled in building responsive websites, developing full-stack applications, and working with modern tools and frameworks. Completed a Web Development Internship at Sumago Infotech, gaining hands-on real-world software development experience.
+
+🛠 Technical Skills
+
+Languages: C++, Java, Python (Beginner)
+
+Web Technologies: HTML, CSS, JavaScript
+
+Tools: Git, VS Code, Postman, Figma
+
+💼 Experience
+
+Web Development Intern — Sumago Infotech (Jun–Aug 2025)
+
+Built functional modules using HTML, CSS, and JavaScript
+
+Learned real-world SDLC workflows and debugging
+
+Completed tasks under mentor guidance
+
+📂 Projects
+Portfolio Website (Dec 2025)
+
+Tech: HTML, CSS, JavaScript
+
+Built a responsive and animated personal portfolio
+
+Clean UI + optimized performance
+
+Student Attendance Management ERP (Apr 2025)
+
+Tech: MERN Stack
+
+Built centralized ERP system for attendance
+
+Implemented JWT authentication
+
+Dynamic charts & real-time dashboards
+
+🎓 Education
+
+B.Tech CSE, Godavari College of Engineering — 2024–Present
+
+Diploma CSE, KBH Polytechnic, Malegaon — 2021–2024
+
+☎️ Contact
+
+Phone: +91 7385210293
+
+Email: rajsuryanshi659@gmail.com
+
+LinkedIn: linkedin.com/in/raj-suryavanshi-158531254
+
+GitHub: github.com/raj659721
+
+🛠 Backend Requirements — Supabase Only
+
+Use Supabase to store + handle:
+
+1. Contact Form Submission
+
+Fields:
+
+name
+
+email
+
+message
+
+timestamp
+
+2. Project List (Optional Dynamic Loading)
+
+Store projects in a Supabase table and fetch them dynamically.
+
+3. Newsletter Subscription (Optional)
+
+Store user’s email to Supabase table subscribers.
+
+No backend files. No Express.
+Just:
+
+import { createClient } from '@supabase/supabase-js'
+
+🧱 Project Structure
+src/
+  components/
+    Navbar.jsx
+    Hero.jsx
+    About.jsx
+    Skills.jsx
+    Experience.jsx
+    Projects.jsx
+    Education.jsx
+    Contact.jsx
+    ThreeScene.jsx
+  lib/
+    supabaseClient.js
+  App.jsx
+  main.jsx
+  index.css
+
+🌟 Development Requirements
+
+Configure Tailwind CSS with Vite
+
+Add smooth scroll behavior
+
+Use Framer Motion animations section-wise
+
+Implement a professional 3D scene in ThreeScene.jsx
+
+Use modular, reusable UI components
+
+Write clean, commented code
