@@ -96,5 +96,99 @@
     <p>© 2025 Your Name. All rights reserved.</p>
 </footer>
 
+<h1 align="center">🎮 Welcome Player!</h1>
+
+<h2 align="center">
+🕹️ Raj Suryavanshi 🕹️
+</h2>
+
+<p align="center">
+🚀 Developer | 💻 Programmer | 🎯 Tech Enthusiast
+</p>
+
+<p align="center">
+<a href="https://github.com/raj659721">
+<img src="https://img.shields.io/badge/GitHub-raj659721-black?style=for-the-badge&logo=github">
+</a>
+<a href="https://www.linkedin.com/in/raj-suryavanshi-158531254">
+<img src="https://img.shields.io/badge/LinkedIn-Raj_Suryavanshi-blue?style=for-the-badge&logo=linkedin">
+</a>
+</p>
+
+<hr>
+
+<h2>🧙‍♂️ About Me</h2>
+
+<p>
+🎯 Hello! I’m <strong>Raj Suryavanshi</strong>, a passionate developer who loves building
+cool projects, learning new technologies, and leveling up skills like a game character.
+</p>
+
+<ul>
+<li>🧠 Learning new tech daily</li>
+<li>⚔️ Turning ideas into code</li>
+<li>🎮 Game & tech lover</li>
+</ul>
+
+<hr>
+
+<h2>🧩 Skill Tree</h2>
+
+<p>
+🟢 <strong>Frontend</strong><br>
+⚡ HTML | 🎨 CSS | 🧠 JavaScript
+</p>
+
+<p>
+🔵 <strong>Backend</strong><br>
+🐍 Python | ☕ Java (Basics)
+</p>
+
+<p>
+🟣 <strong>Tools</strong><br>
+🛠️ Git | 🧑‍💻 GitHub | 🖥️ VS Code
+</p>
+
+<hr>
+
+<h2>🏆 Quests & Projects</h2>
+
+<ul>
+<li>🗡️ <strong>Portfolio Website</strong> – Personal developer portfolio</li>
+<li>🛡️ <strong>Mini Web Apps</strong> – Practice-based projects</li>
+<li>🎯 <strong>Learning Projects</strong> – Skill upgrades in progress</li>
+</ul>
+
+<hr>
+
+<h2>📊 Player Stats</h2>
+
+<p align="center">
+<img src="https://github-readme-stats.vercel.app/api?username=raj659721&show_icons=true&theme=tokyonight">
+</p>
+
+<p align="center">
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=raj659721&layout=compact&theme=tokyonight">
+</p>
+
+<hr>
+
+<h2>📬 Connect With Me</h2>
+
+<p>
+📧 Reach me on LinkedIn:<br>
+🔗 <a href="https://www.linkedin.com/in/raj-suryavanshi-158531254">
+Raj Suryavanshi
+</a>
+</p>
+
+<hr>
+
+<h3 align="center">
+✨ Thanks for visiting my profile ✨<br>
+🎮 Game On & Keep Coding 🚀
+</h3>
+
+
 </body>
 </html>
