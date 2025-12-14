@@ -1,194 +1,126 @@
+<div align="center">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name | Portfolio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background: #222;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-        }
-        section {
-            padding: 40px;
-            max-width: 900px;
-            margin: auto;
-            background: #fff;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
-        h2 {
-            color: #222;
-        }
-        .skills span {
-            display: inline-block;
-            background: #222;
-            color: #fff;
-            padding: 8px 12px;
-            margin: 5px;
-            border-radius: 4px;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #222;
-            color: #fff;
-            margin-top: 40px;
-        }
-        a {
-            color: #0077cc;
-            text-decoration: none;
-        }
-    </style>
-</head>
-<body>
+  <!-- 🎮 GAME TITLE -->
+  <h1>🎮 Raj Suryavanshi — Developer Mode Activated 🚀</h1>
+  <h3>⚔️ Player One | Web Developer | Code Explorer ⚔️</h3>
 
-<header>
-    <h1>Your Name</h1>
-    <p>Web Developer | Designer | Programmer</p>
-</header>
+  <br/>
 
-<section>
-    <h2>About Me</h2>
-    <p>
-        Hello! I'm a passionate developer who loves building web applications
-        and learning new technologies.
-    </p>
-</section>
+  <!-- 🎯 BADGES -->
+  <a href="https://github.com/raj659721" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-raj659721-181717?style=for-the-badge&logo=github" />
+  </a>
+  <a href="https://www.linkedin.com/in/raj-suryavanshi-158531254" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-Raj%20Suryavanshi-0A66C2?style=for-the-badge&logo=linkedin" />
+  </a>
 
-<section>
-    <h2>Skills</h2>
-    <div class="skills">
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JavaScript</span>
-        <span>React</span>
-        <span>Python</span>
-    </div>
-</section>
+</div>
 
-<section>
-    <h2>Projects</h2>
-    <ul>
-        <li><strong>Project One:</strong> Description of your project</li>
-        <li><strong>Project Two:</strong> Description of your project</li>
-        <li><strong>Project Three:</strong> Description of your project</li>
-    </ul>
-</section>
+<hr/>
 
-<section>
-    <h2>Contact</h2>
-    <p>Email: your-email@example.com</p>
-    <p>GitHub: <a href="https://github.com/your-username">your-username</a></p>
-    <p>LinkedIn: <a href="#">Your Profile</a></p>
-</section>
-
-<footer>
-    <p>© 2025 Your Name. All rights reserved.</p>
-</footer>
-
-<h1 align="center">🎮 Welcome Player!</h1>
-
-<h2 align="center">
-🕹️ Raj Suryavanshi 🕹️
-</h2>
-
-<p align="center">
-🚀 Developer | 💻 Programmer | 🎯 Tech Enthusiast
-</p>
-
-<p align="center">
-<a href="https://github.com/raj659721">
-<img src="https://img.shields.io/badge/GitHub-raj659721-black?style=for-the-badge&logo=github">
-</a>
-<a href="https://www.linkedin.com/in/raj-suryavanshi-158531254">
-<img src="https://img.shields.io/badge/LinkedIn-Raj_Suryavanshi-blue?style=for-the-badge&logo=linkedin">
-</a>
-</p>
-
-<hr>
-
+<!-- 🧙‍♂️ ABOUT ME -->
 <h2>🧙‍♂️ About Me</h2>
-
 <p>
-🎯 Hello! I’m <strong>Raj Suryavanshi</strong>, a passionate developer who loves building
-cool projects, learning new technologies, and leveling up skills like a game character.
+  Hey there! 👋 I’m <strong>Raj Suryavanshi</strong>, a passionate and curious web developer who loves
+  building clean, interactive, and user-friendly web experiences.
+</p>
+<p>
+  I enjoy turning ideas into reality using modern web technologies and continuously
+  leveling up my skills like a true RPG player 🎯.
+</p>
+<p>
+  🌐 Check out my portfolio website:
+  <a href="https://portfolio-peach-seven-75.vercel.app" target="_blank">
+    https://portfolio-peach-seven-75.vercel.app
+  </a>
 </p>
 
-<ul>
-<li>🧠 Learning new tech daily</li>
-<li>⚔️ Turning ideas into code</li>
-<li>🎮 Game & tech lover</li>
-</ul>
+<hr/>
 
-<hr>
-
+<!-- 🧩 SKILL TREE -->
 <h2>🧩 Skill Tree</h2>
-
-<p>
-🟢 <strong>Frontend</strong><br>
-⚡ HTML | 🎨 CSS | 🧠 JavaScript
-</p>
-
-<p>
-🔵 <strong>Backend</strong><br>
-🐍 Python | ☕ Java (Basics)
-</p>
-
-<p>
-🟣 <strong>Tools</strong><br>
-🛠️ Git | 🧑‍💻 GitHub | 🖥️ VS Code
-</p>
-
-<hr>
-
-<h2>🏆 Quests & Projects</h2>
-
 <ul>
-<li>🗡️ <strong>Portfolio Website</strong> – Personal developer portfolio</li>
-<li>🛡️ <strong>Mini Web Apps</strong> – Practice-based projects</li>
-<li>🎯 <strong>Learning Projects</strong> – Skill upgrades in progress</li>
+  <li>🟢 HTML5 — Structure Master</li>
+  <li>🔵 CSS3 — Styling & UI Design</li>
+  <li>🟡 JavaScript — Logic & Interactivity</li>
+  <li>⚛️ React — Component-Based Development</li>
+  <li>🟣 Node.js — Backend Basics</li>
+  <li>🗄️ Supabase / Firebase — Auth & Database</li>
+  <li>🎨 UI/UX — Clean & Professional Design</li>
+  <li>🛠️ Git & GitHub — Version Control</li>
 </ul>
 
-<hr>
+<hr/>
 
-<h2>📊 Player Stats</h2>
+<!-- 🏆 PROJECTS -->
+<h2>🏆 Projects</h2>
 
-<p align="center">
-<img src="https://github-readme-stats.vercel.app/api?username=raj659721&show_icons=true&theme=tokyonight">
-</p>
-
-<p align="center">
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=raj659721&layout=compact&theme=tokyonight">
-</p>
-
-<hr>
-
-<h2>📬 Connect With Me</h2>
-
+<h3>🌟 Portfolio Website</h3>
 <p>
-📧 Reach me on LinkedIn:<br>
-🔗 <a href="https://www.linkedin.com/in/raj-suryavanshi-158531254">
-Raj Suryavanshi
-</a>
+  A fully responsive personal portfolio showcasing my skills, projects, and developer journey.
+</p>
+<ul>
+  <li>🎮 Modern UI with smooth interactions</li>
+  <li>📱 Fully responsive design</li>
+  <li>⚡ Fast deployment using Vercel</li>
+</ul>
+<p>
+  🔗 Live Demo:
+  <a href="https://portfolio-peach-seven-75.vercel.app" target="_blank">
+    View Website
+  </a>
+</p>
+<p>
+  💻 GitHub Repo:
+  <a href="https://github.com/raj659721/Portfolio" target="_blank">
+    View Code
+  </a>
 </p>
 
-<hr>
+<hr/>
 
-<h3 align="center">
-✨ Thanks for visiting my profile ✨<br>
-🎮 Game On & Keep Coding 🚀
-</h3>
+<!-- 📊 GITHUB STATS -->
+<h2>📊 GitHub Stats</h2>
 
+<div align="center">
+  <img
+    src="https://github-readme-stats.vercel.app/api?username=raj659721&show_icons=true&theme=tokyonight"
+    alt="GitHub Stats"
+  />
+  <br/><br/>
+  <img
+    src="https://github-readme-stats.vercel.app/api/top-langs/?username=raj659721&layout=compact&theme=tokyonight"
+    alt="Top Languages"
+  />
+</div>
 
-</body>
-</html>
+<hr/>
+
+<!-- 📬 CONTACT -->
+<h2>📬 Contact Me</h2>
+<ul>
+  <li>
+    💼 LinkedIn:
+    <a href="https://www.linkedin.com/in/raj-suryavanshi-158531254" target="_blank">
+      Raj Suryavanshi
+    </a>
+  </li>
+  <li>
+    🧑‍💻 GitHub:
+    <a href="https://github.com/raj659721" target="_blank">
+      @raj659721
+    </a>
+  </li>
+</ul>
+
+<hr/>
+
+<!-- 🎉 FOOTER -->
+<div align="center">
+  <h3>🎉 Game On! 🚀</h3>
+  <p>
+    Thanks for visiting my profile.<br/>
+    Keep coding, keep leveling up, and never stop learning! 🎮✨
+  </p>
+</div>
+
