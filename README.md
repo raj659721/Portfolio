@@ -85,7 +85,7 @@
 
 <p>
   🔗 Live:
-  <a href="https://portfolio-peach-seven-75.vercel.app" style="color:#ff9f80;">
+  <a href="https://portfolio-ten-self-41.vercel.app" style="color:#ff9f80;">
     View Portfolio
   </a>
 </p>
